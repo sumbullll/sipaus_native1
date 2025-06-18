@@ -1,0 +1,13 @@
+{
+    "name": "sipaustest/native",
+    "description": "Aplikasi SiManis versi PHP Native",
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "mpdf/mpdf": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
