@@ -1,0 +1,274 @@
+/* public/css/login_style.css */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5; /* Latar belakang abu-abu muda */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden; /* Penting untuk animasi geser */
+    width: 900px; /* Lebar bisa disesuaikan */
+    max-width: 100%;
+    min-height: 550px; /* Tinggi bisa disesuaikan */
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 50px;
+    text-align: center;
+}
+
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2; /* Di atas sign-up saat tidak aktif */
+}
+
+.sign-up-container {
+    left: 0; /* Awalnya di posisi yang sama */
+    width: 50%;
+    opacity: 0; /* Tidak terlihat */
+    z-index: 1; /* Di belakang */
+}
+
+/* Ketika container aktif untuk sign-up */
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%); /* Geser sign-in ke kanan (keluar area kiri) */
+    opacity: 0; /* Sembunyikan */
+}
+
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%); /* Geser sign-up ke area kiri */
+    opacity: 1;
+    z-index: 5; /* Bawa ke depan */
+    animation: show 0.6s;
+}
+
+@keyframes show {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.title {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.input-field {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 25px;
+    font-size: 0.9rem;
+}
+.input-field:focus {
+    outline-color: #0052D4;
+}
+
+
+.btn-action { /* Tombol Login/Sign Up di form */
+    border-radius: 20px;
+    border: 1px solid #0052D4;
+    background-color: #0052D4; /* Warna biru utama */
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in, background-color 0.3s;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.btn-action:active {
+    transform: scale(0.95);
+}
+.btn-action:hover {
+    background-color: #0041a3;
+}
+
+
+.social-container {
+    margin: 20px 0;
+}
+
+.social-container a {
+    border: 1px solid #DDDDDD;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+.social-container a:hover {
+    background-color: #0052D4;
+    color: #fff;
+}
+.social-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+
+/* Overlay Container dan Panelnya */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%; /* Awalnya di sisi kanan */
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100; /* Paling atas */
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%); /* Geser overlay ke kiri */
+}
+
+.overlay {
+    background: linear-gradient(135deg, #367BF5, #0052D4);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #FFFFFF;
+    position: relative;
+    left: -100%; /* Untuk menggeser konten di dalam overlay */
+    height: 100%;
+    width: 200%; /* Dua kali lebar container overlay */
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    display: flex; /* Untuk menata panel overlay berdampingan */
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%); /* Geser konten overlay agar panel kanan terlihat */
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%; /* Setiap panel overlay mengisi setengah dari .overlay */
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+.overlay-panel h1 { font-weight: bold; margin: 0; font-size: 1.8rem; margin-bottom: 10px;}
+.overlay-panel p { font-size: 14px; font-weight: 300; line-height: 20px; letter-spacing: 0.5px; margin: 20px 0 30px; }
+
+.btn-ghost { /* Tombol Sign In/Sign Up di overlay */
+    background-color: transparent;
+    border-color: #FFFFFF;
+    border-width: 2px;
+    border-style: solid;
+}
+.btn-ghost:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+
+.overlay-left {
+    /* Panel ini terlihat saat overlay di sisi kanan (default) */
+    transform: translateX(-20%); /* Sedikit efek parallax saat tidak aktif */
+}
+.container.right-panel-active .overlay-left {
+    transform: translateX(0); /* Kembali normal saat overlay geser ke kiri */
+}
+
+.overlay-right {
+    /* Panel ini terlihat saat overlay di sisi kiri */
+    right: 0;
+    transform: translateX(0);
+}
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%); /* Sedikit efek parallax saat aktif */
+}
+
+.image-placeholder-overlay {
+    width: 150px; /* Sesuaikan ukuran */
+    height: 150px;
+    margin-top: 20px;
+}
+.image-placeholder-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container { width: 95%; min-height: 600px; }
+    .form-container { padding: 0 20px;}
+    .title { font-size: 1.8rem; }
+    .overlay-container { display: none; } /* Sembunyikan overlay di mobile, tampilkan form berurutan atau tab */
+    .sign-in-container, .sign-up-container { width: 100%; }
+    .container.right-panel-active .sign-in-container { transform: translateY(100%); }
+    .container.right-panel-active .sign-up-container { transform: translateY(100%); }
+}
+
+/* Error and Status Messages */
+.error-message, #status-message {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+#status-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
