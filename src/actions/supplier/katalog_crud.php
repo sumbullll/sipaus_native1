@@ -1,3 +1,5 @@
+<?php
+// src/actions/supplier/katalog_crud.php
 header('Content-Type: application/json');
 $method = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents('php://input'), true);
